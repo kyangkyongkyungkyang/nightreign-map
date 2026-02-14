@@ -1892,9 +1892,7 @@ var BASE_SEEDS = [
       "Center West": "Ancestor Spirit",
       "Center East": "Bell Bearing Hunter",
       "Far Northwest": "Ulcerated Tree Spirit",
-      "Northwest": "Putrid Ancestral Followers",
       "Northeast": "Erdtree Avatar",
-      "Far Northeast": "Putrid Ancestral Followers"
     },
     rotBlessing: "Southwest",
   },
@@ -1953,14 +1951,12 @@ var BASE_SEEDS = [
       "Northwest of Summonwater": "Golden Hippopotamus"
     },
     rottedWoods: {
-      "Southwest": "Putrid Ancestral Followers",
       "Southeast": "Erdtree Avatar",
       "Center West": "Ancestor Spirit",
       "Center East": "Magma Wyrm",
       "Far Northwest": "Bell Bearing Hunter",
       "Northwest": "Draconic Tree Sentinel",
       "Northeast": "Black Blade Kindred",
-      "Far Northeast": "Putrid Ancestral Followers"
     },
     rotBlessing: "Northeast",
   },
@@ -2020,14 +2016,12 @@ var BASE_SEEDS = [
       "Northwest of Summonwater": "Elder Lion"
     },
     rottedWoods: {
-      "Southwest": "Putrid Ancestral Followers",
       "Southeast": "Tree Sentinel",
       "Center West": "Ulcerated Tree Spirit",
       "Center East": "Ancestor Spirit",
       "Far Northwest": "Erdtree Avatar",
       "Northwest": "Magma Wyrm",
       "Northeast": "Royal Carian Knight",
-      "Far Northeast": "Putrid Ancestral Followers"
     },
     rotBlessing: "West",
   },
@@ -2088,10 +2082,8 @@ var BASE_SEEDS = [
     },
     rottedWoods: {
       "Southwest": "Erdtree Avatar",
-      "Southeast": "Putrid Ancestral Followers",
       "Center West": "Black Blade Kindred",
       "Center East": "Magma Wyrm",
-      "Far Northwest": "Putrid Ancestral Followers",
       "Northwest": "Draconic Tree Sentinel",
       "Northeast": "Tree Sentinel",
       "Far Northeast": "Ulcerated Tree Spirit"
@@ -2153,13 +2145,11 @@ var BASE_SEEDS = [
       "Northwest of Summonwater": "Red Wolf"
     },
     rottedWoods: {
-      "Southwest": "Putrid Ancestral Followers",
       "Southeast": "Ulcerated Tree Spirit",
       "Center West": "Erdtree Avatar",
       "Center East": "Royal Carian Knight",
       "Far Northwest": "Black Blade Kindred",
       "Northwest": "Ancestor Spirit",
-      "Northeast": "Putrid Ancestral Followers",
       "Far Northeast": "Draconic Tree Sentinel"
     },
     rotBlessing: "West",
@@ -4331,8 +4321,6 @@ var BASE_SEEDS = [
       "Center West": "Royal Carian Knight",
       "Center East": "Ulcerated Tree Spirit",
       "Far Northwest": "Tree Sentinel",
-      "Northwest": "Putrid Ancestral Followers",
-      "Northeast": "Putrid Ancestral Followers",
       "Far Northeast": "Ancestor Spirit"
     },
     rotBlessing: "Southwest",
@@ -4396,9 +4384,7 @@ var BASE_SEEDS = [
       "Southwest": "Black Blade Kindred",
       "Southeast": "Death Rite Bird",
       "Center West": "Ancestor Spirit",
-      "Center East": "Putrid Ancestral Followers",
       "Far Northwest": "Erdtree Avatar",
-      "Northwest": "Putrid Ancestral Followers",
       "Northeast": "Royal Carian Knight",
       "Far Northeast": "Bell Bearing Hunter"
     },
@@ -4464,10 +4450,8 @@ var BASE_SEEDS = [
       "Southeast": "Draconic Tree Sentinel",
       "Center West": "Ulcerated Tree Spirit",
       "Center East": "Black Blade Kindred",
-      "Far Northwest": "Putrid Ancestral Followers",
       "Northwest": "Erdtree Avatar",
       "Northeast": "Bell Bearing Hunter",
-      "Far Northeast": "Putrid Ancestral Followers"
     },
     rotBlessing: "West",
   },
@@ -4531,8 +4515,6 @@ var BASE_SEEDS = [
       "Center West": "Magma Wyrm",
       "Center East": "Ancestor Spirit",
       "Far Northwest": "Royal Carian Knight",
-      "Northwest": "Putrid Ancestral Followers",
-      "Northeast": "Putrid Ancestral Followers",
       "Far Northeast": "Death Rite Bird"
     },
     rotBlessing: "Northeast",
@@ -4594,11 +4576,9 @@ var BASE_SEEDS = [
     rottedWoods: {
       "Southwest": "Royal Carian Knight",
       "Southeast": "Death Rite Bird",
-      "Center West": "Putrid Ancestral Followers",
       "Center East": "Ancestor Spirit",
       "Far Northwest": "Black Blade Kindred",
       "Northwest": "Draconic Tree Sentinel",
-      "Northeast": "Putrid Ancestral Followers",
       "Far Northeast": "Magma Wyrm"
     },
     rotBlessing: "West",
@@ -6762,13 +6742,11 @@ var BASE_SEEDS = [
       "Northwest of Summonwater": "Golden Hippopotamus"
     },
     rottedWoods: {
-      "Southwest": "Putrid Ancestral Followers",
       "Southeast": "Tree Sentinel",
       "Center West": "Ulcerated Tree Spirit",
       "Center East": "Death Rite Bird",
       "Far Northwest": "Black Blade Kindred",
       "Northwest": "Royal Carian Knight",
-      "Northeast": "Putrid Ancestral Followers",
       "Far Northeast": "Magma Wyrm"
     },
     rotBlessing: "Northeast",
@@ -6828,12 +6806,10 @@ var BASE_SEEDS = [
       "Northwest of Summonwater": "Grafted Scion"
     },
     rottedWoods: {
-      "Southwest": "Putrid Ancestral Followers",
       "Southeast": "Draconic Tree Sentinel",
       "Center West": "Tree Sentinel",
       "Center East": "Death Rite Bird",
       "Far Northwest": "Erdtree Avatar",
-      "Northwest": "Putrid Ancestral Followers",
       "Northeast": "Ulcerated Tree Spirit",
       "Far Northeast": "Bell Bearing Hunter"
     },
@@ -6896,14 +6872,12 @@ var BASE_SEEDS = [
       "Northwest of Summonwater": "Ancient Hero of Zamor"
     },
     rottedWoods: {
-      "Southwest": "Putrid Ancestral Followers",
       "Southeast": "Bell Bearing Hunter",
       "Center West": "Tree Sentinel",
       "Center East": "Magma Wyrm",
       "Far Northwest": "Death Rite Bird",
       "Northwest": "Ancestor Spirit",
       "Northeast": "Black Blade Kindred",
-      "Far Northeast": "Putrid Ancestral Followers"
     },
     rotBlessing: "Southwest",
   },
@@ -6968,8 +6942,6 @@ var BASE_SEEDS = [
       "Center West": "Erdtree Avatar",
       "Center East": "Ulcerated Tree Spirit",
       "Far Northwest": "Bell Bearing Hunter",
-      "Northwest": "Putrid Ancestral Followers",
-      "Northeast": "Putrid Ancestral Followers",
       "Far Northeast": "Ancestor Spirit"
     },
     rotBlessing: "West",
@@ -7034,9 +7006,7 @@ var BASE_SEEDS = [
       "Center West": "Death Rite Bird",
       "Center East": "Ulcerated Tree Spirit",
       "Far Northwest": "Ancestor Spirit",
-      "Northwest": "Putrid Ancestral Followers",
       "Northeast": "Erdtree Avatar",
-      "Far Northeast": "Putrid Ancestral Followers"
     },
     rotBlessing: "West",
   },
@@ -9195,9 +9165,7 @@ var BASE_SEEDS = [
       "Northwest of Summonwater": "Royal Carian Knight"
     },
     rottedWoods: {
-      "Southwest": "Putrid Ancestral Followers",
       "Southeast": "Magma Wyrm",
-      "Center West": "Putrid Ancestral Followers",
       "Center East": "Royal Carian Knight",
       "Far Northwest": "Ulcerated Tree Spirit",
       "Northwest": "Death Rite Bird",
@@ -9263,8 +9231,6 @@ var BASE_SEEDS = [
     rottedWoods: {
       "Southwest": "Magma Wyrm",
       "Southeast": "Death Rite Bird",
-      "Center West": "Putrid Ancestral Followers",
-      "Center East": "Putrid Ancestral Followers",
       "Far Northwest": "Bell Bearing Hunter",
       "Northwest": "Draconic Tree Sentinel",
       "Northeast": "Ancestor Spirit",
@@ -9330,10 +9296,8 @@ var BASE_SEEDS = [
     rottedWoods: {
       "Southwest": "Bell Bearing Hunter",
       "Southeast": "Magma Wyrm",
-      "Center West": "Putrid Ancestral Followers",
       "Center East": "Erdtree Avatar",
       "Far Northwest": "Draconic Tree Sentinel",
-      "Northwest": "Putrid Ancestral Followers",
       "Northeast": "Royal Carian Knight",
       "Far Northeast": "Ulcerated Tree Spirit"
     },
@@ -9396,10 +9360,8 @@ var BASE_SEEDS = [
     },
     rottedWoods: {
       "Southwest": "Ulcerated Tree Spirit",
-      "Southeast": "Putrid Ancestral Followers",
       "Center West": "Tree Sentinel",
       "Center East": "Erdtree Avatar",
-      "Far Northwest": "Putrid Ancestral Followers",
       "Northwest": "Ancestor Spirit",
       "Northeast": "Royal Carian Knight",
       "Far Northeast": "Draconic Tree Sentinel"
@@ -9466,8 +9428,6 @@ var BASE_SEEDS = [
       "Center West": "Tree Sentinel",
       "Center East": "Draconic Tree Sentinel",
       "Far Northwest": "Magma Wyrm",
-      "Northwest": "Putrid Ancestral Followers",
-      "Northeast": "Putrid Ancestral Followers",
       "Far Northeast": "Bell Bearing Hunter"
     },
     rotBlessing: "Southwest",
@@ -11631,9 +11591,7 @@ var BASE_SEEDS = [
       "Southeast": "Ancestor Spirit",
       "Center West": "Tree Sentinel",
       "Center East": "Erdtree Avatar",
-      "Far Northwest": "Putrid Ancestral Followers",
       "Northwest": "Black Blade Kindred",
-      "Northeast": "Putrid Ancestral Followers",
       "Far Northeast": "Death Rite Bird"
     },
     rotBlessing: "Southwest",
@@ -11697,10 +11655,8 @@ var BASE_SEEDS = [
       "Southwest": "Ulcerated Tree Spirit",
       "Southeast": "Royal Carian Knight",
       "Center West": "Black Blade Kindred",
-      "Center East": "Putrid Ancestral Followers",
       "Far Northwest": "Ancestor Spirit",
       "Northwest": "Erdtree Avatar",
-      "Northeast": "Putrid Ancestral Followers",
       "Far Northeast": "Draconic Tree Sentinel"
     },
     rotBlessing: "West",
@@ -11760,12 +11716,10 @@ var BASE_SEEDS = [
       "Northwest of Summonwater": "Golden Hippopotamus"
     },
     rottedWoods: {
-      "Southwest": "Putrid Ancestral Followers",
       "Southeast": "Bell Bearing Hunter",
       "Center West": "Magma Wyrm",
       "Center East": "Erdtree Avatar",
       "Far Northwest": "Royal Carian Knight",
-      "Northwest": "Putrid Ancestral Followers",
       "Northeast": "Draconic Tree Sentinel",
       "Far Northeast": "Tree Sentinel"
     },
@@ -11828,12 +11782,10 @@ var BASE_SEEDS = [
     rottedWoods: {
       "Southwest": "Magma Wyrm",
       "Southeast": "Tree Sentinel",
-      "Center West": "Putrid Ancestral Followers",
       "Center East": "Black Blade Kindred",
       "Far Northwest": "Death Rite Bird",
       "Northwest": "Draconic Tree Sentinel",
       "Northeast": "Erdtree Avatar",
-      "Far Northeast": "Putrid Ancestral Followers"
     },
     rotBlessing: "Northeast",
   },
@@ -11893,11 +11845,9 @@ var BASE_SEEDS = [
       "Northwest of Summonwater": "Red Wolf"
     },
     rottedWoods: {
-      "Southwest": "Putrid Ancestral Followers",
       "Southeast": "Bell Bearing Hunter",
       "Center West": "Erdtree Avatar",
       "Center East": "Magma Wyrm",
-      "Far Northwest": "Putrid Ancestral Followers",
       "Northwest": "Ulcerated Tree Spirit",
       "Northeast": "Royal Carian Knight",
       "Far Northeast": "Tree Sentinel"
@@ -14063,10 +14013,8 @@ var BASE_SEEDS = [
     rottedWoods: {
       "Southwest": "Draconic Tree Sentinel",
       "Southeast": "Ancestor Spirit",
-      "Center West": "Putrid Ancestral Followers",
       "Center East": "Magma Wyrm",
       "Far Northwest": "Bell Bearing Hunter",
-      "Northwest": "Putrid Ancestral Followers",
       "Northeast": "Erdtree Avatar",
       "Far Northeast": "Ulcerated Tree Spirit"
     },
@@ -14129,11 +14077,9 @@ var BASE_SEEDS = [
       "Northwest of Summonwater": "Royal Revenant"
     },
     rottedWoods: {
-      "Southwest": "Putrid Ancestral Followers",
       "Southeast": "Bell Bearing Hunter",
       "Center West": "Tree Sentinel",
       "Center East": "Black Blade Kindred",
-      "Far Northwest": "Putrid Ancestral Followers",
       "Northwest": "Death Rite Bird",
       "Northeast": "Ancestor Spirit",
       "Far Northeast": "Royal Carian Knight"
@@ -14201,8 +14147,6 @@ var BASE_SEEDS = [
       "Center East": "Death Rite Bird",
       "Far Northwest": "Tree Sentinel",
       "Northwest": "Erdtree Avatar",
-      "Northeast": "Putrid Ancestral Followers",
-      "Far Northeast": "Putrid Ancestral Followers"
     },
     rotBlessing: "West",
   },
@@ -14263,9 +14207,7 @@ var BASE_SEEDS = [
     rottedWoods: {
       "Southwest": "Death Rite Bird",
       "Southeast": "Erdtree Avatar",
-      "Center West": "Putrid Ancestral Followers",
       "Center East": "Ulcerated Tree Spirit",
-      "Far Northwest": "Putrid Ancestral Followers",
       "Northwest": "Ancestor Spirit",
       "Northeast": "Royal Carian Knight",
       "Far Northeast": "Bell Bearing Hunter"
@@ -14332,9 +14274,7 @@ var BASE_SEEDS = [
       "Southwest": "Ulcerated Tree Spirit",
       "Southeast": "Death Rite Bird",
       "Center West": "Bell Bearing Hunter",
-      "Center East": "Putrid Ancestral Followers",
       "Far Northwest": "Magma Wyrm",
-      "Northwest": "Putrid Ancestral Followers",
       "Northeast": "Royal Carian Knight",
       "Far Northeast": "Erdtree Avatar"
     },
@@ -16499,9 +16439,7 @@ var BASE_SEEDS = [
       "Southwest": "Black Blade Kindred",
       "Southeast": "Draconic Tree Sentinel",
       "Center West": "Bell Bearing Hunter",
-      "Center East": "Putrid Ancestral Followers",
       "Far Northwest": "Ancestor Spirit",
-      "Northwest": "Putrid Ancestral Followers",
       "Northeast": "Erdtree Avatar",
       "Far Northeast": "Tree Sentinel"
     },
@@ -16566,9 +16504,7 @@ var BASE_SEEDS = [
       "Southeast": "Erdtree Avatar",
       "Center West": "Death Rite Bird",
       "Center East": "Bell Bearing Hunter",
-      "Far Northwest": "Putrid Ancestral Followers",
       "Northwest": "Black Blade Kindred",
-      "Northeast": "Putrid Ancestral Followers",
       "Far Northeast": "Tree Sentinel"
     },
     rotBlessing: "West",
@@ -16634,8 +16570,6 @@ var BASE_SEEDS = [
       "Center West": "Royal Carian Knight",
       "Center East": "Ancestor Spirit",
       "Far Northwest": "Erdtree Avatar",
-      "Northwest": "Putrid Ancestral Followers",
-      "Northeast": "Putrid Ancestral Followers",
       "Far Northeast": "Magma Wyrm"
     },
     rotBlessing: "Northeast",
@@ -16698,8 +16632,6 @@ var BASE_SEEDS = [
     rottedWoods: {
       "Southwest": "Magma Wyrm",
       "Southeast": "Erdtree Avatar",
-      "Center West": "Putrid Ancestral Followers",
-      "Center East": "Putrid Ancestral Followers",
       "Far Northwest": "Tree Sentinel",
       "Northwest": "Black Blade Kindred",
       "Northeast": "Ancestor Spirit",
@@ -16763,12 +16695,10 @@ var BASE_SEEDS = [
       "Northwest of Summonwater": "Grafted Scion"
     },
     rottedWoods: {
-      "Southwest": "Putrid Ancestral Followers",
       "Southeast": "Tree Sentinel",
       "Center West": "Ulcerated Tree Spirit",
       "Center East": "Erdtree Avatar",
       "Far Northwest": "Bell Bearing Hunter",
-      "Northwest": "Putrid Ancestral Followers",
       "Northeast": "Royal Carian Knight",
       "Far Northeast": "Draconic Tree Sentinel"
     },
@@ -18938,9 +18868,7 @@ var BASE_SEEDS = [
       "Southwest": "Black Blade Kindred",
       "Southeast": "Ancestor Spirit",
       "Center West": "Erdtree Avatar",
-      "Center East": "Putrid Ancestral Followers",
       "Far Northwest": "Death Rite Bird",
-      "Northwest": "Putrid Ancestral Followers",
       "Northeast": "Ulcerated Tree Spirit",
       "Far Northeast": "Draconic Tree Sentinel"
     },
@@ -19002,13 +18930,11 @@ var BASE_SEEDS = [
       "Northwest of Summonwater": "Night's Cavalry"
     },
     rottedWoods: {
-      "Southwest": "Putrid Ancestral Followers",
       "Southeast": "Magma Wyrm",
       "Center West": "Draconic Tree Sentinel",
       "Center East": "Ancestor Spirit",
       "Far Northwest": "Black Blade Kindred",
       "Northwest": "Erdtree Avatar",
-      "Northeast": "Putrid Ancestral Followers",
       "Far Northeast": "Tree Sentinel"
     },
     rotBlessing: "West",
@@ -19071,9 +18997,7 @@ var BASE_SEEDS = [
     rottedWoods: {
       "Southwest": "Tree Sentinel",
       "Southeast": "Ulcerated Tree Spirit",
-      "Center West": "Putrid Ancestral Followers",
       "Center East": "Royal Carian Knight",
-      "Far Northwest": "Putrid Ancestral Followers",
       "Northwest": "Ancestor Spirit",
       "Northeast": "Black Blade Kindred",
       "Far Northeast": "Magma Wyrm"
@@ -19142,8 +19066,6 @@ var BASE_SEEDS = [
       "Center East": "Draconic Tree Sentinel",
       "Far Northwest": "Tree Sentinel",
       "Northwest": "Black Blade Kindred",
-      "Northeast": "Putrid Ancestral Followers",
-      "Far Northeast": "Putrid Ancestral Followers"
     },
     rotBlessing: "Northeast",
   },
@@ -19204,10 +19126,8 @@ var BASE_SEEDS = [
     rottedWoods: {
       "Southwest": "Royal Carian Knight",
       "Southeast": "Black Blade Kindred",
-      "Center West": "Putrid Ancestral Followers",
       "Center East": "Bell Bearing Hunter",
       "Far Northwest": "Death Rite Bird",
-      "Northwest": "Putrid Ancestral Followers",
       "Northeast": "Ulcerated Tree Spirit",
       "Far Northeast": "Erdtree Avatar"
     },
