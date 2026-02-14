@@ -33,8 +33,6 @@
       modal:           $('#modal'),
       modalTitle:      $('#modal-title'),
       modalInfo:       $('#modal-info'),
-      modalImage:      $('#modal-image'),
-      modalImageWrap:  $('#modal-image-wrap'),
       modalClose:      $('#modal-close'),
       modalBg:         $('#modal .modal-bg'),
       bossWeakness:    $('#boss-weakness')
@@ -797,15 +795,6 @@
       }).addTo(map));
     }
 
-    // 상인
-    if (seed.merchant) {
-      var ml = MERCHANT_LOCATIONS.find(function (l) { return l.name === seed.merchant; });
-      if (ml) {
-        addMarker(L.marker(toLatLng(ml.x, ml.y), {
-          icon: makeCircleIcon('merchant', 30, '$')
-        }).addTo(map));
-      }
-    }
 
   }
 
@@ -891,15 +880,6 @@
 
   function openModal(seed) {
     dom.modalTitle.textContent = '#' + seed.id + ' — ' + bossNameKo(seed.nightlord);
-
-    var imgNum = seed.id + 1000;
-    var imgSrc = 'images/map/' + imgNum + '.png';
-
-    dom.modalImage.src = imgSrc;
-    dom.modalImage.onerror = function () { dom.modalImageWrap.classList.add('hidden'); };
-    dom.modalImage.onload = function () { dom.modalImageWrap.classList.remove('hidden'); };
-    dom.modalImageWrap.classList.remove('hidden');
-
     dom.modalInfo.innerHTML = '';
     addModalSection('기본 정보', [
       ['밤의 왕', bossNameKo(seed.nightlord)],
