@@ -1004,7 +1004,6 @@
   document.addEventListener('DOMContentLoaded', function () {
     cacheDom();
     initMap();
-    state.earth = 'Default';
     renderBossGrid();
     renderEarthGrid();
     showClickableSpawns();
