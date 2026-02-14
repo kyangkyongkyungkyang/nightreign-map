@@ -973,7 +973,7 @@
 
   /* ══════════ 초기화 ══════════ */
   function resetAll() {
-    state.earth = null;
+    state.earth = 'Default';
     state.bossId = null;
     state.spawnName = null;
     state.candidates = [];
