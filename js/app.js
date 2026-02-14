@@ -1,13 +1,4 @@
-/**
- * 나이트레인 시드 파인더
- *
- * 시드 확정 후 "미니맵 모드":
- *   모든 마커에 적/보스 이름을 영구 라벨로 표시,
- *   클릭 상호작용 없이 한눈에 정보를 확인할 수 있도록 함.
- *
- * 식별: full-value 레벨 (건물 타입 + 적 속성)으로 정밀 구분
- * 약점 매칭: 보스 약점과 거점 속성이 같으면 초록 테두리
- */
+/** 나이트레인 시드 파인더 */
 (function () {
   'use strict';
 
@@ -18,8 +9,7 @@
     spawnName: null,
     candidates: [],
     identified: {},       // { locName: fullValue }
-    selectedSeedId: null,
-    showingUnder: false
+    selectedSeedId: null
   };
 
   var map;
@@ -34,15 +24,12 @@
   function cacheDom() {
     dom = {
       bossGrid:        $('#boss-grid'),
-      bossInfo:        $('#boss-info'),
       earthGrid:       $('#earth-grid'),
       statusBar:       $('#status-bar'),
       statusText:      $('#status-text'),
       identifiedChips: $('#identified-chips'),
       resetBtn:        $('#reset-btn'),
       specialEvent:    $('#special-event'),
-      legend:          $('#legend'),
-      legendItems:     $('#legend-items'),
       modal:           $('#modal'),
       modalTitle:      $('#modal-title'),
       modalInfo:       $('#modal-info'),
@@ -50,7 +37,7 @@
       modalImageWrap:  $('#modal-image-wrap'),
       modalClose:      $('#modal-close'),
       modalBg:         $('#modal .modal-bg'),
-      modalToggle:     $('#modal-toggle-under')
+      bossWeakness:    $('#boss-weakness')
     };
   }
 
@@ -180,10 +167,11 @@
   }
 
   /** 이미지 아이콘 (필드보스=redBoss, 에버골=evergaol) */
-  function makeImgIcon(src, sz) {
+  function makeImgIcon(src, sz, cls) {
+    var c = cls ? ' ' + cls : '';
     return L.divIcon({
       className: '',
-      html: '<div class="img-icon-marker" style="width:' + sz + 'px;height:' + sz +
+      html: '<div class="img-icon-marker' + c + '" style="width:' + sz + 'px;height:' + sz +
             'px;"><img src="' + src + '"/></div>',
       iconSize: [sz, sz], iconAnchor: [sz / 2, sz / 2], popupAnchor: [0, -sz / 2]
     });
@@ -234,11 +222,15 @@
       dom.bossGrid.appendChild(card);
     });
 
-    if (state.bossId) {
-      showBossInfo(findBoss(state.bossId));
-    } else {
-      dom.bossInfo.style.display = 'none';
-    }
+    // DLC 확장 슬롯
+    ['DLC 1', 'DLC 2'].forEach(function (label) {
+      var dlc = document.createElement('div');
+      dlc.className = 'boss-card dlc-slot';
+      dlc.innerHTML = '<span class="dlc-label">' + label + '</span>';
+      dom.bossGrid.appendChild(dlc);
+    });
+
+    renderBossWeakness(state.bossId ? findBoss(state.bossId) : null);
   }
 
   function isBossAvailable(bossName) {
@@ -248,23 +240,73 @@
     });
   }
 
-  function showBossInfo(boss) {
-    if (!boss) { dom.bossInfo.style.display = 'none'; return; }
-    dom.bossInfo.style.display = '';
-    var html = '';
-    if (boss.weakness && ELEMENT_ICONS[boss.weakness]) {
-      html += '<span class="el-tag weak"><img src="' + ELEMENT_ICONS[boss.weakness] +
-              '"/>' + ELEMENT_KO[boss.weakness] + '</span>';
+  /* ── 약점표 ── */
+  var WK_DMG_LABELS = ['표준','참격','타격','관통'];
+  var WK_ELEM_KEYS  = ['magic','fire','lightning','holy'];
+  var WK_STS_KEYS   = ['poison','rot','bleed','frostbite','sleep','madness'];
+
+  function renderBossWeakness(boss) {
+    var el = dom.bossWeakness;
+    if (!boss || !BOSS_DAMAGE || !BOSS_DAMAGE[boss.id]) {
+      el.style.display = 'none';
+      return;
     }
-    if (boss.resist) {
-      boss.resist.forEach(function (r) {
-        if (ELEMENT_ICONS[r]) {
-          html += '<span class="el-tag resist"><img src="' + ELEMENT_ICONS[r] +
-                  '"/>' + ELEMENT_KO[r] + '</span>';
-        }
+    el.style.display = '';
+    var phases = BOSS_DAMAGE[boss.id];
+    var html = '<div class="wk-title">보스 약점표</div>';
+    if (phases.length > 1) {
+      html += '<div class="wk-phases">';
+      phases.forEach(function (p, i) {
+        html += '<button class="wk-phase-btn' + (i === 0 ? ' active' : '') + '">' + p.name + '</button>';
       });
+      html += '</div>';
     }
-    dom.bossInfo.innerHTML = html;
+    html += '<div class="wk-body"></div>';
+    el.innerHTML = html;
+    buildWkBody(el.querySelector('.wk-body'), phases[0]);
+
+    var btns = el.querySelectorAll('.wk-phase-btn');
+    for (var i = 0; i < btns.length; i++) {
+      (function (idx) {
+        btns[idx].addEventListener('click', function () {
+          for (var j = 0; j < btns.length; j++) btns[j].classList.remove('active');
+          btns[idx].classList.add('active');
+          buildWkBody(el.querySelector('.wk-body'), phases[idx]);
+        });
+      })(i);
+    }
+  }
+
+  function buildWkBody(container, phase) {
+    var h = '<div class="wk-row wk-4">';
+    for (var i = 0; i < 4; i++) h += wkDmgCell(WK_DMG_LABELS[i], null, phase.dmg[i]);
+    h += '</div><div class="wk-row wk-4">';
+    for (var i = 0; i < 4; i++) h += wkDmgCell(null, WK_ELEM_KEYS[i], phase.dmg[i + 4]);
+    h += '</div><div class="wk-row wk-3">';
+    for (var i = 0; i < 3; i++) h += wkStsCell(WK_STS_KEYS[i], phase.sts[i]);
+    h += '</div><div class="wk-row wk-3">';
+    for (var i = 3; i < 6; i++) h += wkStsCell(WK_STS_KEYS[i], phase.sts[i]);
+    h += '</div>';
+    container.innerHTML = h;
+  }
+
+  function wkDmgCell(label, elemKey, val) {
+    var head = elemKey
+      ? '<img src="' + ELEMENT_ICONS[elemKey] + '" title="' + ELEMENT_KO[elemKey] + '"/>'
+      : '<span class="wk-lbl">' + label + '</span>';
+    var cls = val > 0 ? 'wk-pos' : val < 0 ? 'wk-neg' : 'wk-zero';
+    var txt = val === 0 ? '-' : (val > 0 ? '+' : '') + val + '%';
+    return '<div class="wk-cell">' + head + '<span class="' + cls + '">' + txt + '</span></div>';
+  }
+
+  function wkStsCell(elemKey, val) {
+    var icon = ELEMENT_ICONS[elemKey];
+    var head = icon
+      ? '<img src="' + icon + '" title="' + ELEMENT_KO[elemKey] + '"/>'
+      : '<span class="wk-lbl">' + (ELEMENT_KO[elemKey] || elemKey) + '</span>';
+    var cls = val === null ? 'wk-zero' : '';
+    var txt = val === null ? '-' : '' + val;
+    return '<div class="wk-cell">' + head + '<span class="' + cls + '">' + txt + '</span></div>';
   }
 
   /* ══════════ 지형 패널 (우측 상단) ══════════ */
@@ -298,7 +340,6 @@
     showClickableSpawns();
     updateStatusBar();
     hideSpecialEvent();
-    dom.legend.style.display = 'none';
   }
 
   function selectEarth(earthName) {
@@ -319,7 +360,6 @@
     showClickableSpawns();
     updateStatusBar();
     hideSpecialEvent();
-    dom.legend.style.display = 'none';
   }
 
   /* ══════════ 스폰 마커 ══════════ */
@@ -374,9 +414,6 @@
     } else {
       showIdentifyMarkers();
     }
-
-    dom.legend.style.display = '';
-    showIdentifyLegend();
   }
 
   /* ══════════ 거점 식별 (full-value 레벨) ══════════ */
@@ -619,6 +656,14 @@
   /* ══════════ 시드 확정 ══════════ */
   function confirmSeed(seed) {
     state.selectedSeedId = seed.id;
+    // 보스 미선택 시 시드의 밤의 왕으로 자동 선택
+    if (!state.bossId) {
+      var boss = BOSSES.find(function (b) { return b.name === seed.nightlord; });
+      if (boss) {
+        state.bossId = boss.id;
+        renderBossGrid();
+      }
+    }
     showSeedMarkers(seed);
     updateStatusBar();
   }
@@ -659,33 +704,39 @@
       });
     }
 
-    // Minor Base — 건물 아이콘 + 적 이름 라벨 (작게, 속성 뱃지 없음)
+    // Minor Base — 교회·마술사탑·마을만 표시 (Small Camp 제외)
     if (seed.minorBases) {
       Object.keys(seed.minorBases).forEach(function (locName) {
         var loc = MINOR_BASE_LOCATIONS.find(function (l) { return l.name === locName; });
         if (!loc) return;
         var val = seed.minorBases[locName];
         var type = parseBaseType(val);
+        if (type !== 'Church' && type !== "Sorcerer's Rise" && type !== 'Township') return;
         var enemy = parseEnemyName(val);
         var m = L.marker(toLatLng(loc.x, loc.y), {
           icon: makeBaseIcon(type, null, 48, false)
         }).addTo(map);
-        m.bindTooltip(toKo(enemy), {
-          permanent: true, direction: 'bottom', offset: [0, 14], className: 'marker-label'
-        });
+        if (enemy !== 'Normal') {
+          m.bindTooltip(toKo(enemy), {
+            permanent: true, direction: 'bottom', offset: [0, 14], className: 'marker-label'
+          });
+        }
         addMarker(m);
       });
     }
 
-    // 필드 보스 — redBoss.png + 보스명 라벨
+    // 필드 보스 — 두려운 강적 / 강적 구분
     if (seed.fieldBosses) {
       Object.keys(seed.fieldBosses).forEach(function (locName) {
         var loc = FIELD_BOSS_LOCATIONS.find(function (l) { return l.name === locName; });
         if (!loc) return;
+        var bossName = seed.fieldBosses[locName];
+        var isMinor = MINOR_FIELD_BOSSES.indexOf(bossName) >= 0;
+        var bossIcon = isMinor ? 'images/icon/fieldBoss.png' : 'images/icon/redBoss.png';
         var m = L.marker(toLatLng(loc.x, loc.y), {
-          icon: makeImgIcon('images/icon/redBoss.png', 48)
+          icon: makeImgIcon(bossIcon, 48)
         }).addTo(map);
-        m.bindTooltip(toKo(seed.fieldBosses[locName]), {
+        m.bindTooltip(toKo(bossName), {
           permanent: true, direction: 'bottom', offset: [0, 16], className: 'marker-label'
         });
         addMarker(m);
@@ -713,10 +764,10 @@
         var loc = ROTTED_WOODS_FB_LOCATIONS.find(function (l) { return l.name === locName; });
         if (!loc) return;
         var m = L.marker(toLatLng(loc.x, loc.y), {
-          icon: makeCircleIcon('rottedWoods', 36, 'R')
+          icon: makeImgIcon('images/icon/redBoss.png', 42)
         }).addTo(map);
         m.bindTooltip(toKo(seed.rottedWoods[locName]), {
-          permanent: true, direction: 'bottom', offset: [0, 12], className: 'marker-label'
+          permanent: true, direction: 'bottom', offset: [0, 14], className: 'marker-label'
         });
         addMarker(m);
       });
@@ -727,7 +778,7 @@
       var rb = ROT_BLESSING_LOCATIONS.find(function (l) { return l.name === seed.rotBlessing; });
       if (rb) {
         var rm = L.marker(toLatLng(rb.x, rb.y), {
-          icon: makeCircleIcon('rotBlessing', 30, 'B')
+          icon: makeCircleIcon('rotBlessing', 44, '은총')
         }).addTo(map);
         addMarker(rm);
       }
@@ -756,7 +807,6 @@
       }
     }
 
-    showFullLegend(seed);
   }
 
   function addNightCircleLabeled(circleName, dayNum, bossName) {
@@ -778,7 +828,7 @@
   /* ══════════ 스페셜 이벤트 배너 ══════════ */
   function showSpecialEvent(text) {
     if (dom.specialEvent) {
-      dom.specialEvent.textContent = '스페셜 이벤트 : ' + toKo(text);
+      dom.specialEvent.textContent = '습격 이벤트 : ' + toKo(text);
       dom.specialEvent.style.display = '';
     }
   }
@@ -833,46 +883,6 @@
     });
   }
 
-  /* ══════════ 범례 ══════════ */
-  function showIdentifyLegend() {
-    dom.legendItems.innerHTML = '';
-    addLegendIcon('images/icon/spawn.png', '낙하 지점');
-    addLegendDot('unknown', '?', '미식별 거점');
-    ['Ruins', 'Camp', 'Fort', 'Great Church', 'Church', "Sorcerer's Rise", 'Township'].forEach(function (t) {
-      addLegendIcon(getTypeIcon(t), getTypeKo(t));
-    });
-  }
-
-  function showFullLegend(seed) {
-    dom.legendItems.innerHTML = '';
-    dom.legend.style.display = '';
-    addLegendIcon('images/icon/spawn.png', '낙하 지점');
-    ['Ruins', 'Camp', 'Fort', 'Great Church'].forEach(function (t) {
-      addLegendIcon(getTypeIcon(t), getTypeKo(t));
-    });
-    addLegendIcon('images/icon/redBoss.png', '필드 보스');
-    addLegendIcon('images/icon/evergaol.png', '봉인감옥');
-    addLegendDot('nightCircle', 'N', '밤 서클');
-    if (seed.rottedWoods) addLegendDot('rottedWoods', 'R', '부패의 숲');
-    addLegendDot('merchant', '$', '상인');
-  }
-
-  function addLegendIcon(src, label) {
-    var row = document.createElement('div');
-    row.className = 'legend-row';
-    row.innerHTML = '<img class="legend-icon" src="' + src + '" /><span>' + label + '</span>';
-    dom.legendItems.appendChild(row);
-  }
-
-  function addLegendDot(cat, letter, label) {
-    var c = MARKER_COLORS[cat] || MARKER_COLORS.unknown;
-    var row = document.createElement('div');
-    row.className = 'legend-row';
-    row.innerHTML = '<span class="legend-dot" style="background:' + c.bg +
-      ';border-color:' + c.border + ';">' + letter + '</span><span>' + label + '</span>';
-    dom.legendItems.appendChild(row);
-  }
-
   /* ══════════ 모달 (상세 보기) ══════════ */
   window._openModal = function (id) {
     var seed = BASE_SEEDS.find(function (s) { return s.id === id; });
@@ -880,41 +890,30 @@
   };
 
   function openModal(seed) {
-    state.showingUnder = false;
     dom.modalTitle.textContent = '#' + seed.id + ' — ' + bossNameKo(seed.nightlord);
 
     var imgNum = seed.id + 1000;
     var imgSrc = 'images/map/' + imgNum + '.png';
-    var underSrc = 'images/map/' + imgNum + '_under.png';
 
     dom.modalImage.src = imgSrc;
     dom.modalImage.onerror = function () { dom.modalImageWrap.classList.add('hidden'); };
     dom.modalImage.onload = function () { dom.modalImageWrap.classList.remove('hidden'); };
     dom.modalImageWrap.classList.remove('hidden');
 
-    dom.modalToggle.style.display = '';
-    dom.modalToggle.className = 'modal-toggle';
-    dom.modalToggle.textContent = '지하 보기';
-    dom.modalToggle.onclick = function () {
-      state.showingUnder = !state.showingUnder;
-      dom.modalImage.src = state.showingUnder ? underSrc : imgSrc;
-      dom.modalToggle.textContent = state.showingUnder ? '지상 보기' : '지하 보기';
-      dom.modalToggle.className = 'modal-toggle' + (state.showingUnder ? ' active' : '');
-    };
-
     dom.modalInfo.innerHTML = '';
     addModalSection('기본 정보', [
-      ['밤의 군주', bossNameKo(seed.nightlord)],
+      ['밤의 왕', bossNameKo(seed.nightlord)],
       ['지형', getEarthKo(seed.shiftingEarth)],
       ['성채', toKo(seed.castle)],
       ['1일차 밤보스', toKo(seed.night1Boss)],
       ['2일차 밤보스', toKo(seed.night2Boss)],
-      ['1일차 밤서클', seed.night1Circle],
-      ['2일차 밤서클', seed.night2Circle],
-      ['특수 이벤트', toKo(seed.specialEvent)],
-      ['상인', seed.merchant],
-      ['부패 축복', seed.rotBlessing],
-      ['광란의 탑', seed.frenzyTower]
+      ['추가 밤보스', toKo(seed.extraNightBoss)],
+      ['1일차 밤서클', toKo(seed.night1Circle)],
+      ['2일차 밤서클', toKo(seed.night2Circle)],
+      ['습격 이벤트', toKo(seed.specialEvent)],
+      ['상인', toKo(seed.merchant)],
+      ['부패 축복', toKo(seed.rotBlessing)],
+      ['광란의 탑', toKo(seed.frenzyTower)]
     ]);
 
     if (seed.majorBases) addModalBaseSection('주요 거점', seed.majorBases);
@@ -954,19 +953,16 @@
       var elHtml = element && ELEMENT_ICONS[element]
         ? '<img src="' + ELEMENT_ICONS[element] + '" style="width:16px;height:16px;"/>'
         : '';
+      var nameDisplay = enemy === 'Normal' ? '' : ' - ' + toKo(enemy);
       row.innerHTML = '<img src="' + getTypeIcon(type) + '" />' + elHtml +
-        '<span class="base-val">' + getTypeKo(type) + ' - ' + toKo(enemy) + '</span>';
+        '<span class="base-val">' + getTypeKo(type) + nameDisplay + '</span>';
       sec.appendChild(row);
     });
     dom.modalInfo.appendChild(sec);
   }
 
-  function objRows(obj) {
-    return Object.keys(obj).map(function (k) { return [k, obj[k]]; });
-  }
-
   function objRowsKo(obj) {
-    return Object.keys(obj).map(function (k) { return [k, toKo(obj[k])]; });
+    return Object.keys(obj).map(function (k) { return [toKo(k), toKo(obj[k])]; });
   }
 
   function closeModal() { dom.modal.style.display = 'none'; }
@@ -987,7 +983,6 @@
     showClickableSpawns();
     updateStatusBar();
     hideSpecialEvent();
-    dom.legend.style.display = 'none';
   }
 
   /* ══════════ 이벤트 바인딩 ══════════ */

@@ -17,14 +17,14 @@
 
   <!-- 좌측 상단: 보스 선택 -->
   <div id="boss-panel" class="overlay boss-panel">
-    <div class="panel-title">밤의 군주</div>
+    <div class="panel-title">밤의 왕</div>
     <div id="boss-grid" class="boss-grid"></div>
-    <div id="boss-info" class="boss-info" style="display:none;"></div>
+    <div id="boss-weakness" class="boss-weakness" style="display:none;"></div>
   </div>
 
   <!-- 우측 상단: 지형 선택 -->
   <div id="earth-panel" class="overlay earth-panel">
-    <div class="panel-title">지형 변동</div>
+    <div class="panel-title">지변</div>
     <div id="earth-grid" class="earth-grid"></div>
   </div>
 
@@ -35,12 +35,7 @@
     <button id="reset-btn" class="reset-btn">초기화</button>
   </div>
 
-  <!-- 우측 하단: 범례 -->
-  <div id="legend" class="overlay legend-panel" style="display:none;">
-    <div id="legend-items" class="legend-items"></div>
-  </div>
-
-  <!-- 스페셜 이벤트 배너 (상단 중앙) -->
+  <!-- 습격 이벤트 배너 (상단 중앙) -->
   <div id="special-event" class="overlay special-event" style="display:none;"></div>
 
   <!-- 모달 -->
@@ -49,10 +44,7 @@
     <div class="modal-box">
       <div class="modal-head">
         <h3 id="modal-title"></h3>
-        <div class="modal-head-actions">
-          <button id="modal-toggle-under" class="modal-toggle" style="display:none;">지하</button>
-          <button id="modal-close" class="modal-close-btn">&times;</button>
-        </div>
+        <button id="modal-close" class="modal-close-btn">&times;</button>
       </div>
       <div class="modal-body">
         <div id="modal-image-wrap" class="modal-image-wrap">
