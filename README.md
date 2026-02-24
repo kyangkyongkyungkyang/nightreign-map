@@ -1,3 +1,5 @@
+[한국어](README.md) | [English](README_EN.md)
+
 # 나이트레인 시드 파인더
 
 엘든링: 밤의 통치자(Elden Ring: Nightreign) 시드 식별용 인터랙티브 맵 도구.
